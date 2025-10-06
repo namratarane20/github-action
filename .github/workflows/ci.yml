@@ -6,8 +6,8 @@ on:
     paths-ignore:
       - .github/workflows/**
       - "**.md"
-  workflow_dispatch: null
-  create: null
+  # workflow_dispatch: null
+  # create: null
 jobs:
   ci:
     uses: Toyota-Motor-North-America/chofer-actions/.github/workflows/ci-maven-lib.yml@v1
