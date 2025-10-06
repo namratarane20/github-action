@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - "**"
-  workflow_dispatch: null
-  create: null
+  workflow_dispatch:
 
 # on:
 #   push:
