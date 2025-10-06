@@ -1,4 +1,37 @@
-name: ci-maven-lib
+name: Node.js CI
+on:
+  push:
+    branches:
+      - "**"
+
+# on:
+#   push:
+#     branches: [ main, master ]
+#   pull_request:
+#     branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests
+      run: npm test-lib
 on:
   push:
     branches:
@@ -6,8 +39,8 @@ on:
     paths-ignore:
       - .github/workflows/**
       - "**.md"
-  # workflow_dispatch: null
-  # create: null
+  workflow_dispatch: null
+  create: null
 jobs:
   ci:
     uses: Toyota-Motor-North-America/chofer-actions/.github/workflows/ci-maven-lib.yml@v1
